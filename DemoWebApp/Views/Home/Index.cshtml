@@ -6,3 +6,28 @@
     <h1 class="display-4">Welcome Billy's Web Page - via Manual Integration!</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div id="result">
+    Loading...
+</div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: 'https://demowebapibjw.azurewebsites.net/api/course',
+                type: 'get',
+                success: function (result) {
+                    var html = "";
+
+                    $(result).map(function (index, value) {
+                        html += "<div>Course: " + value.courseName + "</div>";
+                    })
+
+                    $("#result").html(html);
+                }
+            })
+        });
+    </script>
+}
